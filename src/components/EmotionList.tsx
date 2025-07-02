@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  orderBy,
-  getDocs,
-} from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+//query 객체 - query, where,orderBy,
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+// import { getAuth } from "firebase/auth";
 import "../firebase";
 
 interface TransactionData {
@@ -20,7 +14,7 @@ interface TransactionData {
 }
 const EmotionList = () => {
   const [transactions, setTransactions] = useState<TransactionData[]>([]);
-  const auth = getAuth();
+  // const auth = getAuth();
   const db = getFirestore();
 
   useEffect(() => {
