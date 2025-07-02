@@ -14,19 +14,20 @@ React + Typescript + Vite
 
 ## 프젝젝트 구조
 
+```
 /src
 ├── components
-│ ├── EmotionSelector.tsx
-│ ├── EmotionList.tsx
-│ ├── EmotionChart.tsx
-│ ├──
-│ └──
+│   ├── EmotionSelector.tsx
+│   ├── EmotionList.tsx
+│   └── EmotionChart.tsx
+│
 ├── pages
-│ ├── Login.tsx
-│ ├── SignUp.tsx
-│ ├── Dashboard.tsx
-│ ├── EmotionRecord.tsx // 감정, 지출 기록 페이지
-│ └── EmotionHistory.tsx // 기록 내역
+│   ├── Login.tsx
+│   ├── SignUp.tsx
+│   ├── Dashboard.tsx
+│   ├── EmotionRecord.tsx     // 감정, 지출 기록
+│   └── EmotionHistory.tsx    // 기록 내역
+```
 
 ## 컴포넌트 상세
 
