@@ -10,14 +10,19 @@ import {
 } from "firebase/firestore";
 
 import EmotionSelector from "../components/EmotionSelector";
+import CategorySelector from "@/components/CategorySelector";
+import { EMOTION_ITEMS } from "@/constants/emotion";
+import { CATEGORY_ITEMS } from "@/constants/categories";
 const EmotionRecord = () => {
   const nav = useNavigate();
   /**
    * amount, category, emotion, memo
    */
+
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [emotion, setEmotion] = useState("");
+  // const [category, setCategory] = useState("");
+  const [selectedEmotion, setSelectedEmotion] = useState("");
   const [memo, setMemo] = useState("");
   const [error, setError] = useState("");
   const auth = getAuth();
@@ -31,7 +36,7 @@ const EmotionRecord = () => {
       setError("로그인이 필요합니다.");
       return;
     }
-    if (!amount || !category) {
+    if (!amount || !selectedCategory) {
       setError("금액, 카테고리, 감정은 필수입니다.");
       return;
     }
@@ -40,15 +45,15 @@ const EmotionRecord = () => {
       const testRef = await addDoc(collection(db, "transactions"), {
         userId: user.uid,
         amount: parseInt(amount),
-        category,
-        emotion,
+        selectedCategory,
+        selectedEmotion,
         memo,
         date: serverTimestamp(),
       });
       console.log(testRef.id);
       setAmount("");
-      setCategory("");
-      setEmotion("");
+      setSelectedCategory("");
+      setSelectedEmotion("");
       setMemo("");
       setError("");
       alert("지출이 저장되었습니다.");
@@ -74,26 +79,28 @@ const EmotionRecord = () => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="카테고리 (예: 식비, 교통 등)"
-        className="input input-bordered w-full mb-2"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      />
 
-      <EmotionSelector selected={emotion} onSelect={setEmotion} />
+      <EmotionSelector
+        selected={selectedEmotion}
+        onSelect={setSelectedEmotion}
+        emotions={EMOTION_ITEMS}
+      />
+      <CategorySelector
+        selectedCategory={selectedCategory}
+        onChange={setSelectedCategory}
+        categories={CATEGORY_ITEMS}
+      />
 
       <textarea
         placeholder="메모 (선택)"
-        className="textarea textarea-bordered w-full mb-2"
+        className="textarea textarea-bordered w-full mt-4"
         value={memo}
         onChange={(e) => setMemo(e.target.value)}
       />
 
       {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
-      <button onClick={handleSubmit} className="btn btn-primary w-full">
+      <button onClick={handleSubmit} className="btn btn-primary w-full mt-4">
         저장하기
       </button>
     </div>
