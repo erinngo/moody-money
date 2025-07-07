@@ -8,7 +8,8 @@ import {
 } from "@/utils/computeEmotion";
 
 import "../firebase";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import type { User } from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -33,7 +34,8 @@ const EmotionHistory = () => {
       where("userId", "==", uid)
     );
     const snapshot = await getDocs(q);
-    const data = snapshot.docs.map((doc) => doc.data());
+    // TODO: any타입으로 임시방편, 타입 정비하기
+    const data = snapshot.docs.map((doc) => doc.data() as any);
     console.log(data);
 
     const pieData = computeAmountsByEmotion(data);

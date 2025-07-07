@@ -16,7 +16,7 @@ export default function EmotionSelector({
       <p className="text-sm text-gray-400 mb-2">감정을 선택하세요</p>
       <div className="grid grid-cols-3 gap-1 sm:grid-cols-5">
         {emotions.map((emotion) => {
-          const isSelected = selected === emotion.label;
+          // const isSelected = selected === emotion.label;
           return (
             <button
               key={emotion.label}
