@@ -8,23 +8,29 @@
  * }
  *
  */
-type PieDataType = {
+import { EMOTION_ITEMS } from "@/constants/emotion";
+type PieInputType = {
   emotion: string;
   amount: number;
+}[];
+export type PieChartDataType = {
+  emotion: string;
+  amount: number;
+  color: string;
 }[];
 type BarDataType = {
   emotion: string;
   category: string;
   amount: number;
 }[];
-export const computeAmountsByEmotion = (
-  data: PieDataType
-): Record<string, number> => {
-  return data.reduce((acc, curr) => {
-    acc[curr.emotion] = (acc[curr.emotion] || 0) + curr.amount;
-    return acc;
-  }, {} as Record<string, number>);
-};
+// export const computeAmountsByEmotion = (
+//   data: PieDataType
+// ): Record<string, number> => {
+//   return data.reduce((acc, curr) => {
+//     acc[curr.emotion] = (acc[curr.emotion] || 0) + curr.amount;
+//     return acc;
+//   }, {} as Record<string, number>);
+// };
 
 /**
  * 
@@ -53,6 +59,34 @@ export const computeEmotionCategoryMatrix = (
 
 /**
  * pie chart를 그리기 위해 필요한 data 정리
+ * emotion, amount, color 배열
  */
 
-export const computePieChartData = () => {};
+export const computePieChartData = (data: PieInputType): PieChartDataType => {
+  //1. 감정 별 합계 구하기
+  // {
+  //   "기쁨": 4000,
+  //   "우울": 1500,
+  // }
+  const emotionSumMap = data.reduce<Record<string, number>>((acc, curr) => {
+    acc[curr.emotion] = (acc[curr.emotion] || 0) + curr.amount;
+    return acc;
+  }, {});
+
+  console.log(emotionSumMap);
+  //2. color 추가하기 - EMOTION_ITEMS에서 정보 가져오기
+  /**
+   * Object.entries(객체)
+   * [['기쁨', 4000], ['우울', 1500]]
+   */
+  const pieChartData = Object.entries(emotionSumMap).map(
+    ([emotion, amount]) => {
+      const color =
+        EMOTION_ITEMS.find((item) => item.label === emotion)?.color ?? "gray";
+      return { emotion, amount, color };
+    }
+  );
+  console.log(pieChartData);
+
+  return pieChartData;
+};

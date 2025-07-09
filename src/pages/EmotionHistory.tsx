@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
+import type { PieChartDataType } from "@/utils/computeEmotion";
 import {
-  computeAmountsByEmotion,
   computeEmotionCategoryMatrix,
+  computePieChartData,
 } from "@/utils/computeEmotion";
 
 import "../firebase";
@@ -21,9 +22,7 @@ import {
 
 const EmotionHistory = () => {
   const myDB = getFirestore();
-  const [emotionAmount, setEmotionAmount] = useState<Record<string, number>>(
-    {}
-  );
+  const [emotionPieData, setEmotionPieData] = useState<PieChartDataType>([]);
   const [emotionBarData, setEmotionBarData] = useState<
     Record<string, Record<string, number>>
   >({});
@@ -38,8 +37,9 @@ const EmotionHistory = () => {
     const data = snapshot.docs.map((doc) => doc.data() as any);
     console.log(data);
 
-    const pieData = computeAmountsByEmotion(data);
-    setEmotionAmount(pieData);
+    const pieData = computePieChartData(data);
+
+    setEmotionPieData(pieData);
 
     const barData = computeEmotionCategoryMatrix(data);
     setEmotionBarData(barData);
@@ -67,8 +67,8 @@ const EmotionHistory = () => {
         <EmotionBarChart data={emotionBarData} />
       )}
 
-      {Object.keys(emotionAmount).length > 0 && (
-        <EmotionPieChart data={emotionAmount} />
+      {Object.keys(emotionPieData).length > 0 && (
+        <EmotionPieChart data={emotionPieData} />
       )}
 
       {/* 실제 기록 리스트 */}

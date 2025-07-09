@@ -29,7 +29,10 @@ React + Typescript + Vite
 │   └── EmotionHistory.tsx    // 기록 내역 , 차트분석
 |
 |__ utils
-|    ├── pages
+|     ├── computeEmotion.ts
+|__ constants
+|     ├── emotion.ts
+│     └── categories.ts
 ```
 
 ## 페이지 상세
