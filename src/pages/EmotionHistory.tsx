@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
+import DateRangeSlider from "@/components/DateRangeSlider";
+import seedDummyData from "@/utils/seedFirestore";
 import type { PieChartDataType } from "@/utils/computePieChart";
 import type { BarMatrix } from "@/utils/computeBarMatrix";
 // import {
@@ -27,6 +29,14 @@ const EmotionHistory = () => {
   const myDB = getFirestore();
   const [emotionPieData, setEmotionPieData] = useState<PieChartDataType>([]);
   const [emotionBarData, setEmotionBarData] = useState<BarMatrix>([]);
+  const [rawData, setRawData] = useState<any[]>([]);
+
+  const applyDataToChart = (data: any[]) => {
+    const pieData = computePieChartData(data);
+    const barData = computeBarMatrix(data);
+    setEmotionPieData(pieData);
+    setEmotionBarData(barData);
+  };
 
   const fetchData = async (uid: string) => {
     const q = query(
@@ -37,14 +47,29 @@ const EmotionHistory = () => {
     // TODO: any타입으로 임시방편, 타입 정비하기
     const data = snapshot.docs.map((doc) => doc.data() as any);
     console.log(data);
+    setRawData(data);
 
-    const pieData = computePieChartData(data);
-
-    setEmotionPieData(pieData);
-
-    const barData = computeBarMatrix(data);
-    setEmotionBarData(barData);
+    //차트 초기화
+    applyDataToChart(data);
   };
+
+  //더미데이터 10개씩 추가
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      getAuth(),
+      async (user: User | null) => {
+        if (user) {
+          // 로그인된 경우에만 더미 데이터 삽입
+          await seedDummyData(user.uid);
+          fetchData(user.uid); // 기존 데이터 fetch
+        } else {
+          console.log("유저없음");
+        }
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     //로그인 상태 변할때 실행되는 콜백
@@ -60,6 +85,25 @@ const EmotionHistory = () => {
   }, []);
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
+      <DateRangeSlider
+        onChange={({ start, end }) => {
+          const filtered = rawData.filter((item) => {
+            const date = item.date;
+            let t: number | null = null;
+
+            if (date?.toDate) {
+              t = date.toDate().getTime();
+            } else if (typeof date === "string" || typeof date === "number") {
+              t = new Date(date).getTime();
+            }
+
+            return t !== null && t >= start.getTime() && t <= end.getTime();
+          });
+
+          applyDataToChart(filtered);
+        }}
+      />
+
       <h2 className="text-2xl font-bold mb-4">📊 감정 소비 분석</h2>
 
       {/* 감정 소비 패턴 시각화 */}
