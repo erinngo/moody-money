@@ -1,8 +1,8 @@
 // src/components/EmotionPieChart.tsx
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { computePieChartData } from "@/utils/computeEmotion";
-import type { PieChartDataType } from "@/utils/computeEmotion";
+
+import type { PieChartDataType } from "@/utils/computePieChart";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -18,18 +18,17 @@ interface EmotionPieChartProps {
   data: PieChartDataType;
 }
 const EmotionPieChart = ({ data }: EmotionPieChartProps) => {
-  const computed = computePieChartData(data);
   const chartData = {
     // labels: ["기쁨", "우울", "스트레스", "충동", "지루함"],
-    labels: computed.map((item) => item.emotion),
+    labels: data.map((item) => item.emotion),
     datasets: [
       {
         label: "감정별 소비 합계",
         // data: [3, 5, 8, 2, 1]
-        data: computed.map((item) => item.amount),
+        data: data.map((item) => item.amount),
         //TODO : 라벨 키 별로 색 맵핑
         //EMOTION_COLORS[라벨키] -- 동적 키의 형태로 넣기
-        backgroundColor: computed.map((item) => item.color),
+        backgroundColor: data.map((item) => item.color),
         borderWidth: 1,
       },
     ],

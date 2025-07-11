@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
-import type { PieChartDataType } from "@/utils/computeEmotion";
-import {
-  computeEmotionCategoryMatrix,
-  computePieChartData,
-} from "@/utils/computeEmotion";
+import type { PieChartDataType } from "@/utils/computePieChart";
+import type { BarMatrix } from "@/utils/computeBarMatrix";
+// import {
+//   computeEmotionCategoryMatrix,
+//   computePieChartData,
+// } from "@/utils/computeEmotion";
+import { computePieChartData } from "@/utils/computePieChart";
+import { computeBarMatrix } from "@/utils/computeBarMatrix";
 
 import "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -23,9 +26,7 @@ import {
 const EmotionHistory = () => {
   const myDB = getFirestore();
   const [emotionPieData, setEmotionPieData] = useState<PieChartDataType>([]);
-  const [emotionBarData, setEmotionBarData] = useState<
-    Record<string, Record<string, number>>
-  >({});
+  const [emotionBarData, setEmotionBarData] = useState<BarMatrix>([]);
 
   const fetchData = async (uid: string) => {
     const q = query(
@@ -41,7 +42,7 @@ const EmotionHistory = () => {
 
     setEmotionPieData(pieData);
 
-    const barData = computeEmotionCategoryMatrix(data);
+    const barData = computeBarMatrix(data);
     setEmotionBarData(barData);
   };
 

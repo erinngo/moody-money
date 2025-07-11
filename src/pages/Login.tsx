@@ -44,11 +44,10 @@ const Login = () => {
             className="w-20 h-auto object-contain mx-auto"
           />
           <p>
-            테스트 계정
             <br />
-            test1@gmail.com
+            test@gmail.com
             <br />
-            비밀번호: test11
+            비밀번호: test00
           </p>
 
           <input

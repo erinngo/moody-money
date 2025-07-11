@@ -60,6 +60,16 @@ export const computeEmotionCategoryMatrix = (
 /**
  * pie chart를 그리기 위해 필요한 data 정리
  * emotion, amount, color 배열
+ * 
+ * [
+  {
+    emotion: "기쁨",
+    categories: [
+      { label: "식비", amount: 5000, color: "" },
+      { label: "쇼핑", amount: 3000, color: "" },
+      ...
+    ]
+  },
  */
 
 export const computePieChartData = (data: PieInputType): PieChartDataType => {
