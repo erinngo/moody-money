@@ -35,7 +35,7 @@ const EmotionList = () => {
   }, []);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative">
       <h2 className="text-xl font-semibold">감정 소비 내역</h2>
       {transactions.length === 0 ? (
         <p className="text-gray-500">기록된 내역이 없습니다.</p>
