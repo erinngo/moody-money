@@ -3,7 +3,7 @@
 //chart.js + react-chartjs-2
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import type { ChartOptions } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 import { useRef, useState } from "react";
 import type { PieChartDataType } from "@/utils/computePieChart";
@@ -49,7 +49,9 @@ const EmotionPieChart = ({ data }: EmotionPieChartProps) => {
     maintainAspectRatio: false,
     cutout: "70%", // 도넛 내부 공간
     plugins: {
-      legend: false,
+      legend: {
+        display: false,
+      },
       // legend: {
       //   position: "top" as const,
       //   labels: {
@@ -83,7 +85,7 @@ const EmotionPieChart = ({ data }: EmotionPieChartProps) => {
       </h3>
       {/* 도넛 차트 중앙 텍스트 ----- 도넛차트 부분만 height 고정 */}
       <div className="relative h-[200px]">
-        <Pie ref={chartRef} data={chartData} options={chartOptions} />
+        <Doughnut ref={chartRef} data={chartData} options={chartOptions} />
 
         {selectedEmotion && (
           <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
@@ -101,7 +103,7 @@ const EmotionPieChart = ({ data }: EmotionPieChartProps) => {
       </div>
       {/* 하단 감정 리스트 */}
       <ul className="mt-6 space-y-2">
-        {data.map((item, index) => {
+        {data.map((item) => {
           const percent = (item.amount / totalAmount) * 100;
           return (
             <li
