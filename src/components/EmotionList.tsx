@@ -104,7 +104,7 @@ const EmotionList = () => {
                       {emotionData?.emoji}
                       {/* 감정 이모티콘 */}
                     </div>
-                    <div class="text-left">
+                    <div className="text-left">
                       {/* text 중앙정렬 */}
                       <p className="font-medium text-gray-800">
                         {item.selectedCategory}
