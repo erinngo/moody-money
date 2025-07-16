@@ -32,8 +32,8 @@ const SignUp = () => {
     };
 
     return (
-      <div className="flex justify-center items-center min-h-screen bg-base-200">
-        <div className="card w-full max-w-sm bg-base-100 shadow-md">
+      <div className=" flex justify-center items-center">
+        <div className="card w-full max-w-md bg-base-100 shadow-xl p-6">
           <div className="card-body">
             <h2 className="text-center text-2xl font-bold">회원가입</h2>
 
