@@ -37,7 +37,7 @@ const Login = () => {
     <div className=" flex justify-center items-center">
       <div className="card w-full max-w-md bg-base-100 shadow-xl p-6">
         <div className="card-body ">
-          <h2 className="text-center text-2xl font-bold">Moody Money</h2>
+          <h2 className="text-center text-2xl font-bold">Moody Money-</h2>
           <img
             src={appImg}
             alt="moody-money 로고"
