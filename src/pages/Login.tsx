@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import appImg from "@/assets/images/moody-money.png";
 
 import {
@@ -81,9 +81,9 @@ const Login = () => {
 
           <p className="text-sm text-center mt-2">
             계정이 없으신가요?{" "}
-            <a className="text-blue-500 underline" href="/signup">
+            <Link className="text-blue-500 underline" to="/signup">
               회원가입
-            </a>
+            </Link>
           </p>
         </div>
       </div>
