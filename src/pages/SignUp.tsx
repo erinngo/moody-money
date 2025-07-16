@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../firebase";
 const SignUp = () => {
   {
@@ -70,9 +70,9 @@ const SignUp = () => {
 
             <p className="text-sm text-center mt-3">
               이미 계정이 있으신가요?{" "}
-              <a className="text-blue-500 underline" href="/login">
+              <Link className="text-blue-500 underline" to="/">
                 로그인
-              </a>
+              </Link>
             </p>
           </div>
         </div>
