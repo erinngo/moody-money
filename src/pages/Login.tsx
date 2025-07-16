@@ -34,58 +34,51 @@ const Login = () => {
   };
 
   return (
-    <div className=" flex justify-center items-center">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl p-6">
-        <div className="card-body ">
-          <h2 className="text-center text-2xl font-bold">Moody Money</h2>
-          <img
-            src={appImg}
-            alt="moody-money 로고"
-            className="w-20 h-auto object-contain mx-auto"
-          />
-          <p>
-            <br />
-            test@gmail.com
-            <br />
-            비밀번호: test00
-          </p>
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <div className="w-full sm:max-w-md bg-white shadow-xl rounded-xl p-8">
+        <h2 className="text-2xl font-bold text-center mb-4">Moody Money</h2>
+        <img src={appImg} alt="logo" className="w-24 h-auto mx-auto mb-6" />
 
+        <p>
+          test@gmail.com
+          <br />
+          test00
+        </p>
+        <div className="space-y-3">
           <input
             type="email"
-            name="email"
             placeholder="이메일"
-            //daisyUI - input 삭제
-            className="w-full border border-gray-300 rounded px-4 py-3 text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input input-bordered w-full"
           />
           <input
             type="password"
-            name="password"
             placeholder="비밀번호"
-            className="w-full border border-gray-300 rounded px-4 py-3 text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input input-bordered w-full"
           />
+        </div>
 
-          <button onClick={handleLogin} className="btn btn-primary w-full mt-3">
+        <div className="mt-5 space-y-3">
+          <button className="btn btn-primary w-full" onClick={handleLogin}>
             로그인
           </button>
-
           <button
-            onClick={handleGoogleLogin}
             className="btn btn-outline w-full"
+            onClick={handleGoogleLogin}
           >
             구글 로그인
           </button>
-
-          <p className="text-sm text-center mt-2">
-            계정이 없으신가요?{" "}
-            <Link className="text-blue-500 underline" to="/signup">
-              회원가입
-            </Link>
-          </p>
         </div>
+
+        <p className="text-sm text-center mt-4">
+          계정이 없으신가요?{" "}
+          <Link to="/signup" className="text-blue-500 underline">
+            회원가입
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -25,6 +25,8 @@ const SignUp = () => {
       } catch (error: any) {
         if (error.code === "auth/email-already-in-use") {
           setError("이미 가입된 이메일입니다.");
+        } else if (error.code === "auth/invalid-email") {
+          setError("올바른 이메일 주소를 입력하세요. (예: user@example.com)");
         } else {
           setError(error.message);
         }
@@ -32,49 +34,47 @@ const SignUp = () => {
     };
 
     return (
-      <div className=" flex justify-center items-center">
-        <div className="card w-full max-w-md bg-base-100 shadow-xl p-6">
-          <div className="card-body">
-            <h2 className="text-center text-2xl font-bold">회원가입</h2>
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <div className="w-full sm:max-w-md bg-white shadow-xl rounded-xl p-8 space-y-3">
+          <h2 className="text-center text-2xl font-bold">회원가입</h2>
 
-            <input
-              type="email"
-              placeholder="이메일"
-              className="input input-bordered w-full"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="비밀번호"
-              className="input input-bordered w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="비밀번호 확인"
-              className="input input-bordered w-full"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+          <input
+            type="email"
+            placeholder="이메일"
+            className="input input-bordered w-full"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            className="input input-bordered w-full"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호 확인"
+            className="input input-bordered w-full"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
 
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
 
-            <button
-              onClick={handleSignup}
-              className="btn btn-primary w-full mt-3"
-            >
-              회원가입
-            </button>
+          <button
+            onClick={handleSignup}
+            className="btn btn-primary w-full mt-3"
+          >
+            회원가입
+          </button>
 
-            <p className="text-sm text-center mt-3">
-              이미 계정이 있으신가요?{" "}
-              <Link className="text-blue-500 underline" to="/">
-                로그인
-              </Link>
-            </p>
-          </div>
+          <p className="text-sm text-center mt-3">
+            이미 계정이 있으신가요?{" "}
+            <Link className="text-blue-500 underline" to="/">
+              로그인
+            </Link>
+          </p>
         </div>
       </div>
     );
