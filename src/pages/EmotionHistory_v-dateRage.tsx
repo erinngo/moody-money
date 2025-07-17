@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
-
+import DateRangeSlider from "@/components/DateRangeSlider";
 import MonthSelector from "@/components/MonthSelector";
-// import seedDummyData from "@/utils/seedFirestore";
+import seedDummyData from "@/utils/seedFirestore";
 import type { PieChartDataType } from "@/utils/computePieChart";
 import type { BarMatrix } from "@/utils/computeBarMatrix";
 // import {
@@ -13,7 +13,6 @@ import type { BarMatrix } from "@/utils/computeBarMatrix";
 // } from "@/utils/computeEmotion";
 import { computePieChartData } from "@/utils/computePieChart";
 import { computeBarMatrix } from "@/utils/computeBarMatrix";
-import { getMonthRange } from "@/utils/getMonthRange";
 
 import "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -42,14 +41,10 @@ const EmotionHistory = () => {
     setEmotionBarData(barData);
   };
 
-  //fechData by month
-  const fetchData = async (uid: string, month: string) => {
-    const { start, end } = getMonthRange(month);
+  const fetchData = async (uid: string) => {
     const q = query(
       collection(myDB, "transactions"),
-      where("userId", "==", uid),
-      where("date", ">=", start),
-      where("date", "<=", end)
+      where("userId", "==", uid)
     );
     const snapshot = await getDocs(q);
     // TODO: any타입으로 임시방편, 타입 정비하기
@@ -62,38 +57,55 @@ const EmotionHistory = () => {
   };
 
   //더미데이터 10개씩 추가
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(
-  //     getAuth(),
-  //     async (user: User | null) => {
-  //       if (user) {
-  //         // 로그인된 경우에만 더미 데이터 삽입
-  //         await seedDummyData(user.uid);
-  //         fetchData(user.uid); // 기존 데이터 fetch
-  //       } else {
-  //         console.log("유저없음");
-  //       }
-  //     }
-  //   );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      getAuth(),
+      async (user: User | null) => {
+        if (user) {
+          // 로그인된 경우에만 더미 데이터 삽입
+          await seedDummyData(user.uid);
+          fetchData(user.uid); // 기존 데이터 fetch
+        } else {
+          console.log("유저없음");
+        }
+      }
+    );
 
-  //   return () => unsubscribe();
-  // }, []);
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
-    // 로그인 상태 변화 시 실행되는 콜백
+    //로그인 상태 변할때 실행되는 콜백
     const unsubscribe = onAuthStateChanged(getAuth(), (user: User | null) => {
       if (user) {
-        fetchData(user.uid, selectedMonth);
+        fetchData(user.uid);
       } else {
-        console.log("유저없음");
+        console.log("유저없음"); // 유저 없음
       }
     });
 
-    return () => unsubscribe();
-  }, [selectedMonth]);
-
+    return () => unsubscribe(); // cleanup
+  }, []);
   return (
     <>
+      <DateRangeSlider
+        onChange={({ start, end }) => {
+          const filtered = rawData.filter((item) => {
+            const date = item.date;
+            let t: number | null = null;
+
+            if (date?.toDate) {
+              t = date.toDate().getTime();
+            } else if (typeof date === "string" || typeof date === "number") {
+              t = new Date(date).getTime();
+            }
+
+            return t !== null && t >= start.getTime() && t <= end.getTime();
+          });
+
+          applyDataToChart(filtered);
+        }}
+      />
       <MonthSelector value={selectedMonth} onChange={setSelectedMonth} />
 
       <h2 className="text-2xl font-bold mb-4">📊 감정 소비 분석</h2>

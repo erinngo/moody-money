@@ -1,4 +1,5 @@
 // 현재 포함 과거 12개월에 대한 month 배열 생성
+// 2025-07
 export const generateMonths = (count = 12): string[] => {
   const months: string[] = [];
   const now = new Date();
