@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
+    <div className="w-full min-h-[100dvh] flex justify-center items-center">
       <div className="w-full sm:max-w-md bg-white shadow-xl rounded-xl p-8">
         <h2 className="text-2xl font-bold text-center mb-4">Moody Money</h2>
         <img src={appImg} alt="logo" className="w-24 h-auto mx-auto mb-6" />

@@ -14,7 +14,7 @@ export default function EmotionSelector({
   return (
     <div className="mt-4">
       <p className="text-sm text-gray-400 mb-2">감정을 선택하세요</p>
-      <div className="grid grid-cols-3 gap-1 sm:grid-cols-5">
+      <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
         {emotions.map((emotion) => {
           // const isSelected = selected === emotion.label;
           return (

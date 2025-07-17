@@ -17,6 +17,10 @@ React + Typescript + Vite
 ```
 /src
 ├── components
+|   ├── common/
+│   |   ├── EmotionLayout.tsx
+│   |   ├── Header.tsx
+|   |
 │   ├── EmotionSelector.tsx
 │   ├── EmotionList.tsx
 |   ├── EmotionPieChart.tsx

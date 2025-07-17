@@ -34,7 +34,7 @@ const SignUp = () => {
     };
 
     return (
-      <div className="w-full min-h-screen flex justify-center items-center">
+      <div className="w-full min-h-[100dvh] flex justify-center items-center">
         <div className="w-full sm:max-w-md bg-white shadow-xl rounded-xl p-8 space-y-3">
           <h2 className="text-center text-2xl font-bold">회원가입</h2>
 

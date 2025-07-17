@@ -18,7 +18,7 @@ const Header = () => {
           >
             ←
           </button>
-          <h1 className="text-lg font-semibold">Emotion</h1>
+          <h1 className="text-lg font-semibold">감정 X 소비</h1>
           <button className="text-xl">⋮</button> {/* 옵션 메뉴 자리 */}
         </div>
 
