@@ -9,7 +9,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import Header from "@/components/common/Header";
 import EmotionSelector from "../components/EmotionSelector";
 import CategorySelector from "@/components/CategorySelector";
 import { EMOTION_ITEMS } from "@/constants/emotion";

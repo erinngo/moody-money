@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "@/components/common/Header";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
