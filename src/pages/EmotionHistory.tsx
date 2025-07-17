@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "@/components/common/Header";
 import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
@@ -84,41 +85,44 @@ const EmotionHistory = () => {
     return () => unsubscribe(); // cleanup
   }, []);
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6">
-      <DateRangeSlider
-        onChange={({ start, end }) => {
-          const filtered = rawData.filter((item) => {
-            const date = item.date;
-            let t: number | null = null;
+    <>
+      <Header />
+      <div className="pt-28 p-6 max-w-3xl mx-auto space-y-6">
+        <DateRangeSlider
+          onChange={({ start, end }) => {
+            const filtered = rawData.filter((item) => {
+              const date = item.date;
+              let t: number | null = null;
 
-            if (date?.toDate) {
-              t = date.toDate().getTime();
-            } else if (typeof date === "string" || typeof date === "number") {
-              t = new Date(date).getTime();
-            }
+              if (date?.toDate) {
+                t = date.toDate().getTime();
+              } else if (typeof date === "string" || typeof date === "number") {
+                t = new Date(date).getTime();
+              }
 
-            return t !== null && t >= start.getTime() && t <= end.getTime();
-          });
+              return t !== null && t >= start.getTime() && t <= end.getTime();
+            });
 
-          applyDataToChart(filtered);
-        }}
-      />
+            applyDataToChart(filtered);
+          }}
+        />
 
-      <h2 className="text-2xl font-bold mb-4">📊 감정 소비 분석</h2>
+        <h2 className="text-2xl font-bold mb-4">📊 감정 소비 분석</h2>
 
-      {/* 감정 소비 패턴 시각화 */}
-      {/* <EmotionBarChart /> */}
-      {Object.keys(emotionBarData).length > 0 && (
-        <EmotionBarChart data={emotionBarData} />
-      )}
+        {/* 감정 소비 패턴 시각화 */}
+        {/* <EmotionBarChart /> */}
+        {Object.keys(emotionBarData).length > 0 && (
+          <EmotionBarChart data={emotionBarData} />
+        )}
 
-      {Object.keys(emotionPieData).length > 0 && (
-        <EmotionPieChart data={emotionPieData} />
-      )}
+        {Object.keys(emotionPieData).length > 0 && (
+          <EmotionPieChart data={emotionPieData} />
+        )}
 
-      {/* 실제 기록 리스트 */}
-      <EmotionList />
-    </div>
+        {/* 실제 기록 리스트 */}
+        <EmotionList />
+      </div>
+    </>
   );
 };
 

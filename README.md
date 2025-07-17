@@ -10,7 +10,7 @@ React + Typescript + Vite
 
 ## 📌 MVP
 
-[지출기록 + 감정태깅 → 시각화분석]
+[지출기록 + 감정태깅 → 시각화 차트 분석]
 
 ## 프젝젝트 구조
 
@@ -19,7 +19,8 @@ React + Typescript + Vite
 ├── components
 │   ├── EmotionSelector.tsx
 │   ├── EmotionList.tsx
-│   └── EmotionChart.tsx
+|   ├── EmotionPieChart.tsx
+│   └── EmotionBarChart.tsx
 │
 ├── pages
 │   ├── Login.tsx
@@ -29,7 +30,10 @@ React + Typescript + Vite
 │   └── EmotionHistory.tsx    // 기록 내역 , 차트분석
 |
 |__ utils
-|     ├── computeEmotion.ts
+|     ├── computeBarMatrix.ts
+|     ├── computePieChart.ts
+|     └── seedFirestore.ts
+|
 |__ constants
 |     ├── emotion.ts
 │     └── categories.ts
@@ -76,4 +80,4 @@ EmotionHistory 페이지 와이어프레임
 
 ## 데이터
 
-DB - FireStore
+DB - FireStore 로 관리

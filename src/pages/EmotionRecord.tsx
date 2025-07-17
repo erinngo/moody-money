@@ -9,6 +9,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
+import Header from "@/components/common/Header";
 import EmotionSelector from "../components/EmotionSelector";
 import CategorySelector from "@/components/CategorySelector";
 import { EMOTION_ITEMS } from "@/constants/emotion";
@@ -67,43 +68,46 @@ const EmotionRecord = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <button onClick={move} className="btn btn-primary w-full">
-        history 이동
-      </button>
-      <h2 className="text-2xl font-bold mb-4">지출 입력</h2>
-      <input
-        type="number"
-        placeholder="금액"
-        className="input input-bordered w-full mb-2"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
+    <>
+      <Header />
+      <div className="pt-28 p-6 max-w-3xl mx-auto space-y-6">
+        <button onClick={move} className="btn btn-primary w-full">
+          history 이동
+        </button>
+        <h2 className="text-2xl font-bold mb-4">지출 입력</h2>
+        <input
+          type="number"
+          placeholder="금액"
+          className="input input-bordered w-full mb-2"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
 
-      <EmotionSelector
-        selected={selectedEmotion}
-        onSelect={setSelectedEmotion}
-        emotions={EMOTION_ITEMS}
-      />
-      <CategorySelector
-        selectedCategory={selectedCategory}
-        onChange={setSelectedCategory}
-        categories={CATEGORY_ITEMS}
-      />
+        <EmotionSelector
+          selected={selectedEmotion}
+          onSelect={setSelectedEmotion}
+          emotions={EMOTION_ITEMS}
+        />
+        <CategorySelector
+          selectedCategory={selectedCategory}
+          onChange={setSelectedCategory}
+          categories={CATEGORY_ITEMS}
+        />
 
-      <textarea
-        placeholder="메모 (선택)"
-        className="textarea textarea-bordered w-full mt-4"
-        value={memo}
-        onChange={(e) => setMemo(e.target.value)}
-      />
+        <textarea
+          placeholder="메모 (선택)"
+          className="textarea textarea-bordered w-full mt-4"
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+        />
 
-      {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
-      <button onClick={handleSubmit} className="btn btn-primary w-full mt-4">
-        저장하기
-      </button>
-    </div>
+        <button onClick={handleSubmit} className="btn btn-primary w-full mt-4">
+          저장하기
+        </button>
+      </div>
+    </>
   );
 };
 

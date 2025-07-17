@@ -79,7 +79,7 @@ const EmotionPieChart = ({ data }: EmotionPieChartProps) => {
   const selectedEmotion = selectedIndex !== null ? data[selectedIndex] : null;
 
   return (
-    <div className="w-full max-w-md mx-auto mb-8 r">
+    <div className="w-full mx-auto mb-8 ">
       <h3 className="text-lg font-semibold text-center mb-4">
         감정별 지출 비율
       </h3>
