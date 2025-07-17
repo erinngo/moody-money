@@ -25,7 +25,8 @@ type GroupByDate = Record<
   }
 >;
 
-const EmotionList = () => {
+const EmotionList = ({ data }: any) => {
+  console.log(data);
   const [transactions, setTransactions] = useState<
     TransactionWithFormattedDate[]
   >([]);
