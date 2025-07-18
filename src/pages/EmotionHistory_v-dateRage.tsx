@@ -121,7 +121,7 @@ const EmotionHistory = () => {
       )}
 
       {/* 실제 기록 리스트 */}
-      <EmotionList />
+      <EmotionList data={rawData} />
     </>
   );
 };
