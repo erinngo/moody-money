@@ -5,7 +5,7 @@ const EmotionLayout = () => {
   return (
     <>
       <Header />
-      <main className="pt-28 p-6 max-w-3xl mx-auto space-y-6">
+      <main className="pt-[130px] p-6 max-w-3xl mx-auto space-y-6">
         <Outlet /> {/* EmotionHistory / EmotionRecord */}
       </main>
     </>

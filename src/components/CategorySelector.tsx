@@ -17,6 +17,7 @@ export default function CategorySelector({
           const isSelected = selectedCategory === cat.label;
           return (
             <button
+              type="button"
               key={cat.label}
               onClick={() => onChange(cat.label)}
               className={`flex flex-col items-center justify-center p-3 rounded-lg border text-sm font-medium transition

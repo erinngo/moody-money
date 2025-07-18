@@ -44,7 +44,6 @@ const MonthSelector = ({ onChange, value }: MonthSelectorProps) => {
 
   return (
     <div ref={ref} className="relative w-full">
-      7월: 달 선택 로직 추가
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center px-4 py-2 bg-white border rounded-lg shadow"

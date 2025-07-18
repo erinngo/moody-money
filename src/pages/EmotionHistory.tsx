@@ -92,22 +92,31 @@ const EmotionHistory = () => {
     return () => unsubscribe();
   }, [selectedMonth]);
 
+  const totalExpense = rawData.reduce((sum, data) => sum + data.amount, 0);
   return (
     <>
       <MonthSelector value={selectedMonth} onChange={setSelectedMonth} />
+      {/* 총지출  */}
+      <div className="flex justify-between items-center bg-gray-50 rounded-lg p-4 mb-4 shadow-sm">
+        <span className="text-gray-500 text-sm">총지출</span>
+        <span className="text-xl font-bold text-gray-800">
+          {totalExpense.toLocaleString()}원
+        </span>
+      </div>
 
-      <h2 className="text-2xl font-bold mb-4">📊 감정 소비 분석</h2>
-
+      {/* <h2 className="text-2xl font-bold mb-4"> 감정 소비 분석</h2> */}
+      <br />
       {/* 감정 소비 패턴 시각화 */}
       {/* <EmotionBarChart /> */}
       {Object.keys(emotionBarData).length > 0 && (
         <EmotionBarChart data={emotionBarData} />
       )}
 
+      <br />
       {Object.keys(emotionPieData).length > 0 && (
         <EmotionPieChart data={emotionPieData} />
       )}
-
+      <br />
       {/* 실제 기록 리스트 */}
       <EmotionList data={rawData} />
     </>
