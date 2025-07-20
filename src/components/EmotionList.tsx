@@ -25,7 +25,7 @@ type GroupByDate = Record<
 >;
 
 const EmotionList = ({ data }: { data: TransactionData[] }) => {
-  console.log(data);
+  // console.log(data);
   if (data.length === 0) {
     return <p className="text-center text-gray-500">데이터가 없습니다.</p>;
   }

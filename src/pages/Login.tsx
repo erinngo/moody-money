@@ -21,9 +21,13 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard"); // 로그인 성공 시 이동할 페이지
-    } catch (err: any) {
-      setError(err.message);
-      console.log(error);
+    } catch (error: any) {
+      if (error.code === "auth/invalid-credential") {
+        setError("로그인 정보를 다시 확인하세요.");
+      } else {
+        setError(error.message);
+        console.log(error);
+      }
     }
   };
 
@@ -40,9 +44,9 @@ const Login = () => {
         <img src={appImg} alt="logo" className="w-24 h-auto mx-auto mb-6" />
 
         <p>
-          test@gmail.com
+          test1@gmail.com
           <br />
-          test00
+          test11
         </p>
         <div className="space-y-3">
           <input
@@ -60,7 +64,7 @@ const Login = () => {
             className="input input-bordered w-full"
           />
         </div>
-
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         <div className="mt-5 space-y-3">
           <button className="btn btn-primary w-full" onClick={handleLogin}>
             로그인

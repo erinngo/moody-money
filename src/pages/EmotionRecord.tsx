@@ -68,9 +68,6 @@ const EmotionRecord = () => {
 
   return (
     <>
-      <button onClick={move} className="btn btn-primary w-full">
-        history 이동 -&gt; 테스트
-      </button>
       <h2 className="text-2xl font-bold mb-4">지출 입력</h2>
       <input
         type="number"

@@ -1,5 +1,6 @@
-import { initializeApp } from "firebase/app";
-
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 /**
  * firebase.ts는 Firebase 앱을 초기화하는 역할만 수행
  * 전역에서 Firebase 서비스를 사용할 수 있도록 세팅
@@ -16,4 +17,7 @@ const firebaseConfig = {
   measurementId: "G-FFMHM8ZRBV",
 };
 
-initializeApp(firebaseConfig); // 초기화 용도
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+export const db = getFirestore(app);
+export const auth = getAuth(app);

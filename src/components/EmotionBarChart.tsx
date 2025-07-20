@@ -37,6 +37,13 @@ interface EmotionBarChartProps {
   data: BarMatrix;
 }
 const EmotionBarChart = ({ data }: EmotionBarChartProps) => {
+  if (!data || data.length === 0) {
+    return (
+      <div className="h-96 flex items-center justify-center text-gray-400">
+        데이터 로딩 중...
+      </div>
+    );
+  }
   //감정 추출
   const labels = data.map((d) => d.emotion);
 
@@ -92,8 +99,13 @@ const EmotionBarChart = ({ data }: EmotionBarChartProps) => {
   // };
 
   const options = {
+    indexAxis: "y" as const,
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
+      // legend: {
+      //   display: false, //범례 숨김
+      // },
       // legend: {
       //   position: "top" as const,
       // },
@@ -105,10 +117,10 @@ const EmotionBarChart = ({ data }: EmotionBarChartProps) => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
-      <h3 className="text-lg font-semibold text-center mb-4">
+    <div className="w-full max-w-3xl mx-auto h-96">
+      {/* <h3 className="text-lg font-semibold text-center mb-4">
         감정 × 카테고리 소비 분석
-      </h3>
+      </h3> */}
       <Bar data={chartData} options={options} />
     </div>
   );
