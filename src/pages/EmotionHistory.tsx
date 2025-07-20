@@ -7,7 +7,7 @@ import EmotionPieChart from "@/components/EmotionPieChart";
 import MonthSelector from "@/components/MonthSelector";
 // import seedDummyData from "@/utils/seedFirestore";
 import type { PieChartDataType } from "@/utils/computePieChart";
-import type { BarMatrix } from "@/utils/computeBarMatrix";
+// import type { BarMatrix } from "@/utils/computeBarMatrix";
 // import {
 //   computeEmotionCategoryMatrix,
 //   computePieChartData,
@@ -40,12 +40,12 @@ const EmotionHistory = () => {
   useEffect(() => {
     if (transactions.length > 0) {
       const pieData = computePieChartData(transactions);
-      const barData = computeBarMatrix(transactions);
+      // const barData = computeBarMatrix(transactions);
       setEmotionPieData(pieData);
-      setEmotionBarData(barData);
+      // setEmotionBarData(barData);
     } else {
       setEmotionPieData([]);
-      setEmotionBarData([]);
+      // setEmotionBarData([]);
     }
   }, [transactions]);
 
