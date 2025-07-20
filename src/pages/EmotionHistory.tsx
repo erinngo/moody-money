@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTransactionStore } from "@/store/useTransactionStores";
-import EmotionBarChart from "@/components/EmotionBarChart";
+// import EmotionBarChart from "@/components/EmotionBarChart";
 import EmotionList from "../components/EmotionList";
 import EmotionPieChart from "@/components/EmotionPieChart";
 
@@ -22,7 +22,7 @@ const EmotionHistory = () => {
   const { transactions, fetchTransactionsByMonth } = useTransactionStore();
   // const myDB = getFirestore();
   const [emotionPieData, setEmotionPieData] = useState<PieChartDataType>([]);
-  const [emotionBarData, setEmotionBarData] = useState<BarMatrix>([]);
+  // const [emotionBarData, setEmotionBarData] = useState<BarMatrix>([]);
   // const [rawData, setRawData] = useState<any[]>([]);
 
   useEffect(() => {

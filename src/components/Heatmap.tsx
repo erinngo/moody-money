@@ -1,4 +1,3 @@
-import React from "react";
 // import { generateMonths } from "@/utils/generateMonths";
 interface HeatmapProps {
   data: {

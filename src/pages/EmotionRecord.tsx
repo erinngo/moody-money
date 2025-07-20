@@ -62,9 +62,6 @@ const EmotionRecord = () => {
       setError("저장 중 오류가 발생했습니다: " + err.message);
     }
   };
-  const move = () => {
-    nav("/history");
-  };
 
   return (
     <>
