@@ -13,7 +13,7 @@ import type { PieChartDataType } from "@/utils/computePieChart";
 //   computePieChartData,
 // } from "@/utils/computeEmotion";
 import { computePieChartData } from "@/utils/computePieChart";
-import { computeBarMatrix } from "@/utils/computeBarMatrix";
+// import { computeBarMatrix } from "@/utils/computeBarMatrix";
 
 const EmotionHistory = () => {
   const [selectedMonth, setSelectedMonth] = useState<string>("2025-07");
