@@ -1,18 +1,44 @@
-# 감정 기반 가계부
+# Moody-Money 감정 기반 가계부
 
-React + Typescript + Vite
+https://moody-money.vercel.app/
 
-## 📌 프로젝트 기획 배경
+> 감정과 소비 데이터를 기록하고 시각화하는 개인용 기록 공간  
+> **"오늘 나는 왜 지출했을까?"** 감정 기록으로 소비 패턴을 분석하세요.
+
+---
+
+## 📌 프로젝트 소개
 
 “moody-money" 는 단순 지출 입력이 아니라 ‘왜 지출이 발생했는가’ 에 대해 되돌아보는데 도움을 주는 자기 관리 앱입니다.
 
 감정상태와 소비를 함께 기록함으로써 자신만의 감정-소비 패턴을 시각적으로 인식하는데 도움을 줄 수 있습니다.
 
-## 📌 MVP
+---
+
+## 📌 주요 기능
 
 [지출기록 + 감정태깅 → 시각화 차트 분석]
 
-## 프젝젝트 구조
+- **대시보드 분석**:
+  - 감정별 비율 Pie Chart
+  - 카테고리별 감정 소비 Bar Chart
+- **핵심 인사이트 메시지**: "이번 달 당신의 감정은 ○○"
+- **감정 + 지출 기록**: 오늘의 소비와 감정을 쉽게 기록
+- **히스토리 뷰**: 월별 데이터 탐색, 감정별 기록 리스트
+
+---
+
+## 🛠 기술 스택
+
+- React + Vite, TypeScript, TailwindCSS
+- Zustand (+ persist)
+- Firebase: Authentication, Firestore
+- Charts: Chart.js + react-chartjs-2
+- Animation: Framer Motion
+
+---
+
+## 📌 프젝젝트 구조
 
 ```
 /src
@@ -20,6 +46,13 @@ React + Typescript + Vite
 |   ├── common/
 │   |   ├── EmotionLayout.tsx
 │   |   ├── Header.tsx
+|   |
+|   ├── dashboard/
+│   |   ├── TopEmotionCard.tsx
+│   |   ├── TotalExpenseCard.tsx
+|   |
+|   ├── CategorySelector.tsx
+|   ├── MonthSelector.tsx
 |   |
 │   ├── EmotionSelector.tsx
 │   ├── EmotionList.tsx
@@ -37,51 +70,34 @@ React + Typescript + Vite
 |     ├── computeBarMatrix.ts
 |     ├── computePieChart.ts
 |     └── seedFirestore.ts
+|           .
+|           .
 |
 |__ constants
 |     ├── emotion.ts
 │     └── categories.ts
 ```
 
+---
+
 ## 페이지 상세
 
-### EmotionRecord.tsx
+### 대시보드
 
-- addDoc (fireStore에 데이터 추가)
+![대시보드](./docs/images/dashboard-preview.png)
 
-### EmotionHistory.tsx (시각화 핵심 페이지)
+### 대시보드-모바일
 
-- getDocs (fireStore에서 데이터 가져오기)
+![대시보드-모바일](./docs/images/dashboard-m.png)
 
-```
-EmotionHistory 페이지 와이어프레임
+### 감정소비 기록
 
-[ 감정 소비 분석 📊 ]
+![입력](./docs/images/record-preview.png)
 
-1. [ 감정 Pie Chart ]
-   😊 기쁨 20% / 😡 스트레스 35% ...
+### 감정소비 히스토리
 
-2. [ 감정 × 카테고리 Bar Chart ]
-   - 스트레스 → 쇼핑: 5건, 식비: 3건
-   - 충동 → 쇼핑: 4건, 기타: 2건
+![히스토리](./docs/images/history-preview.png)
 
-3. [ 감정 지출 내역 리스트 ]
-   - 7/1 스트레스 | ₩12,000 | 쇼핑 | "너무 힘들어서 쇼핑"
-   - 6/28 기쁨 | ₩5,000 | 커피 | "혼카페 좋음"
+### 감정소비 리스트
 
-```
-
-## 컴포넌트 상세
-
-### EmotionSelector.tsx
-
-지출 입력 페이지에서 감정을 선택하고 UI를 표시하는 핵심 컴포넌트
-
-### EmotionBarChart.tsx
-
-(감정 x 카테고리) 매트릭스
-감정별로 어떤 카테고리에 지출이 집중됐는가?
-
-## 데이터
-
-DB - FireStore 로 관리
+![리스트](./docs/images/list-preview.png)
