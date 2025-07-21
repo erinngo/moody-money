@@ -1,7 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { useTransactionStore } from "@/store/useTransactionStores";
-import { generateMonths } from "@/utils/generateMonths";
+
 interface Transaction {
   amount: number;
 }
