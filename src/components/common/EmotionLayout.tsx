@@ -10,12 +10,12 @@ const EmotionLayout = () => {
   return (
     <>
       <Header />
-      <div className="mt-[80px] bg-white sticky z-40">
+      <div className="mt-[80px] bg-white sticky z-40 ">
         {/* 탭 네비게이션 */}
-        <nav className="flex max-w-3xl mx-auto">
+        <nav className="flex max-w-3xl mx-auto bor">
           <button
             onClick={() => navigate("/record")}
-            className={`flex-1 text-center py-2 font-medium ${
+            className={`flex-1 text-center py-2 font-medium bg-white border-black ${
               isRecord
                 ? "text-black border-b-2 border-purple-800"
                 : "text-gray-400"
@@ -25,7 +25,7 @@ const EmotionLayout = () => {
           </button>
           <button
             onClick={() => navigate("/history")}
-            className={`flex-1 text-center py-2 font-medium ${
+            className={`flex-1 text-center py-2 font-medium bg-white border-black ${
               isHistory
                 ? "text-black border-b-2 border-purple-800"
                 : "text-gray-400"

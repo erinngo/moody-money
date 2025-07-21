@@ -1,17 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { useTransactionStore } from "@/store/useTransactionStores";
-import { generateMonths } from "@/utils/generateMonths";
 
-const TopEmotionCard = () => {
-  const { transactions, fetchTransactionsByMonth } = useTransactionStore();
+interface Transaction {
+  selectedEmotion: string;
+}
 
-  const thisMonth = generateMonths(1)[0]; // "2025-07"
+interface TopEmotionCardProps {
+  transactions: Transaction[];
+}
 
-  useEffect(() => {
-    fetchTransactionsByMonth(thisMonth);
-  }, [thisMonth, fetchTransactionsByMonth]);
-
+const TopEmotionCard = ({ transactions }: TopEmotionCardProps) => {
   // 이번 달 가장 많이 기록된 감정 확인
   const topEmotion = useMemo(() => {
     if (transactions.length === 0) return { emotion: "-", count: 0 };
